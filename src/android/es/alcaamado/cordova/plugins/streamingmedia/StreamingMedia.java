@@ -1,22 +1,18 @@
-package com.hutchind.cordova.plugins.streamingmedia;
+package es.alcaamado.cordova.plugins.streamingmedia;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.os.Build;
 import java.util.Iterator;
+
+import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.PluginResult;
 
 public class StreamingMedia extends CordovaPlugin {
+
 	public static final String ACTION_PLAY_AUDIO = "playAudio";
 	public static final String ACTION_PLAY_VIDEO = "playVideo";
 
@@ -25,6 +21,14 @@ public class StreamingMedia extends CordovaPlugin {
 	private CallbackContext callbackContext;
 
 	private static final String TAG = "StreamingMediaPlugin";
+
+	public static Logger logger;
+
+	@Override
+	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+		super.initialize(cordova, webView);
+		logger = new Logger(cordova, webView);
+	}
 
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -45,6 +49,7 @@ public class StreamingMedia extends CordovaPlugin {
 			callbackContext.error("streamingMedia." + action + " is not a supported method.");
 			return false;
 		}
+
 	}
 
 	private boolean playAudio(String url, JSONObject options) {
