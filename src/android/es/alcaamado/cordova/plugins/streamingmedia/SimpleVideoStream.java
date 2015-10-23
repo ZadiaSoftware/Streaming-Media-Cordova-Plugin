@@ -129,7 +129,7 @@ public class SimpleVideoStream extends Activity implements IVLCVout.Callback, Li
 			mMediaPlayer.play();
 			Log.d(TAG, "Starting video");
 		} catch (Exception e) {
-			Toast.makeText(this, "Error creating player!", Toast.LENGTH_LONG).show();
+            wrapItUp(RESULT_CANCELED, "Error creating player");
 		}
 	}
 
@@ -188,7 +188,6 @@ public class SimpleVideoStream extends Activity implements IVLCVout.Callback, Li
 
 	@Override
 	public void onBackPressed() {
-		// If we're leaving, let's finish the activity
 		wrapItUp(RESULT_OK, null);
 	}
 
@@ -202,8 +201,7 @@ public class SimpleVideoStream extends Activity implements IVLCVout.Callback, Li
 
 	@Override
 	public void onNewLayout(IVLCVout vout, int width, int height, int visibleWidth, int visibleHeight, int sarNum, int sarDen) {
-		if (width * height == 0)
-			return;
+		if (width * height == 0) return;
 
 		// store video size
 		mVideoWidth = width;
@@ -230,10 +228,9 @@ public class SimpleVideoStream extends Activity implements IVLCVout.Callback, Li
 
 			switch(event.type) {
 				case MediaPlayer.Event.EndReached:
-					Log.d(TAG, "MediaPlayerEndReached");
-					player.releasePlayer();
+					Log.d(TAG, "MediaPlayer EndReached");
                     if (mShouldAutoClose) {
-                        wrapItUp(RESULT_OK, null);
+                        wrapItUp(RESULT_OK, "End Reached");
                     }
 					break;
 				case MediaPlayer.Event.Playing:
@@ -249,7 +246,6 @@ public class SimpleVideoStream extends Activity implements IVLCVout.Callback, Li
 	public void eventHardwareAccelerationError() {
 		// Handle errors with hardware acceleration
 		Log.e(TAG, "Error with hardware acceleration");
-		this.releasePlayer();
-		Toast.makeText(this, "Error with hardware acceleration", Toast.LENGTH_LONG).show();
+        wrapItUp(RESULT_CANCELED, "Error with hardware acceleration");
 	}
 }
