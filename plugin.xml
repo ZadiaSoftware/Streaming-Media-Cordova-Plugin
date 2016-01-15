@@ -38,6 +38,9 @@
 		</config-file>
 		<header-file src="src/ios/StreamingMedia.h" />
 		<source-file src="src/ios/StreamingMedia.m" />
+		<header-file src="src/ios/StreamingVideoController.h" />
+		<source-file src="src/ios/StreamingVideoController.m" />
+		<resource-file src="src/ios/StreamingView.xib" />
 		<framework src="MediaPlayer.framework" />
 	</platform>
 
