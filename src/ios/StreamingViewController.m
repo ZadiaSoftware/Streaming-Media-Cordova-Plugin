@@ -2,7 +2,7 @@
 //  StreamingViewController.m
 //  EniMote
 //
-//  Created by Gonzalo Mateo Sixto on 27/10/15.
+//  Created by Adrián Calviño Amado
 //
 //
 
@@ -47,6 +47,8 @@
 }
 
 - (IBAction)goBack:(id)sender {
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
