@@ -1,5 +1,3 @@
-#import <Foundation/Foundation.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import <Cordova/CDVPlugin.h>
 
 @interface StreamingMedia : CDVPlugin
